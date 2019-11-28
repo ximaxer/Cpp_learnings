@@ -8,6 +8,6 @@
  *
  * @author ximax
  */
-public class Project {
+public class Project extends InvestigationCenter {
     
 }
