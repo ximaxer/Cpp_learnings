@@ -6,4 +6,4 @@ public class InvestigationCenter {
         ArrayList<Project> Projects = new ArrayList<Project>() ;
     }
     
-}
+}adwsedfghbn
