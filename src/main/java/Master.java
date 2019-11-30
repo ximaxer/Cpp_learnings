@@ -50,6 +50,6 @@ public class Master extends Grantee{
 
     @Override
     public void cost(){
-        super.Salary=1200.00;
+        super.Salary=1000.00;
     }
 }

@@ -18,9 +18,9 @@ abstract public class Person extends InvestigationCenter{
     //============================             ===============================//
     //========================================================================//
     //========================================================================//
-    String name, email;
-    double Salary;
-    ArrayList<Tasks> tarefas = new ArrayList<Tasks>();
+    protected String name, email;
+    protected double Salary;
+    ArrayList<Task> tasks = new ArrayList<Task>();
    
     
     //========================================================================//
@@ -65,10 +65,10 @@ abstract public class Person extends InvestigationCenter{
     }
     
     public boolean verifyEffor(){
-        Tasks A = new Tasks();
+        Task A = new Task();
         double effort=0;
-        for(int i=0;i<tarefas.size();i++){
-                A = tarefas.get(i);
+        for(int i=0;i<tasks.size();i++){
+                A = tasks.get(i);
                 effort+=A.effort();
         }
         if(effort>=1){

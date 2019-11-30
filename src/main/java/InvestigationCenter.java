@@ -38,13 +38,13 @@ public class InvestigationCenter {
     //========================================================================//
     public void showDelayedP(){
         Project A = new Project();
+        Calendar est = (Calendar)Calendar.getInstance();
         System.out.println("\nPROJETOS ATRASADOS:");
         for(int i=0;i<projects.size();i++){
             A = projects.get(i);
             
             Calendar currentT = Calendar.getInstance();
-            Calendar est = Calendar.setTime(A.date);
-            est= Calendar.getInstance(A.date);
+            est.setTime(A.initialDate);
             est.add(Calendar.MONTH , A.estDuration);
             Date dataEstFinal = est.getTime();    //dataEstFinal -> data inicial + estimated duration
             Date dataHoje = currentT.getTime();
@@ -57,6 +57,7 @@ public class InvestigationCenter {
     }
     
     public void showFinishedP(){
+        Project A = new Project();
         System.out.println("\nPROJETOS ATRASADOS:");
         for(int i=0;i<projects.size();i++){
             A = projects.get(i);

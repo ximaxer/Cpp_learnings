@@ -10,11 +10,11 @@ public class Project extends InvestigationCenter {
     //========================================================================//  
     ArrayList<Docent> docents = new ArrayList<Docent>();
     ArrayList<Grantee> grantees = new ArrayList<Grantee>();
-    ArrayList<Tasks> tasks = new ArrayList<Tasks>();
+    ArrayList<Task> tasks = new ArrayList<Task>();
     Person mD;
     String name, acronym;
     Date initialDate,finalDate;
-    double estDuration;
+    int estDuration;
     boolean projectState;
     //========================================================================//
     //========================================================================//
@@ -32,7 +32,7 @@ public class Project extends InvestigationCenter {
         this.finalDate=null;
     }
 
-    public Project(String name,String acronym,Date initDate,double estDuration,Date finalDate){
+    public Project(String name,String acronym,Date initDate,int estDuration,Date finalDate){
         this.name=name;
         this.acronym=acronym;
         this.initialDate=initDate;
@@ -71,7 +71,7 @@ public class Project extends InvestigationCenter {
     public double getEstDuration(){
         return estDuration;
     }
-    public void setEstDuration(double estDuration){
+    public void setEstDuration(int estDuration){
         this.estDuration=estDuration;
     }
     
