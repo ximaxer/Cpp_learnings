@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Calendar;
+import java.util.*;
 
 public class InvestigationCenter {
     //========================================================================//
@@ -42,7 +40,7 @@ public class InvestigationCenter {
         Project A = new Project();
         System.out.println("\nPROJETOS ATRASADOS:");
         for(int i=0;i<projects.size();i++){
-            A = Projects.get(i);
+            A = projects.get(i);
             
             Calendar currentT = Calendar.getInstance();
             Calendar est = Calendar.setTime(A.date);
@@ -61,7 +59,7 @@ public class InvestigationCenter {
     public void showFinishedP(){
         System.out.println("\nPROJETOS ATRASADOS:");
         for(int i=0;i<projects.size();i++){
-            A = Projects.get(i);
+            A = projects.get(i);
             if(A.finalDate!=null){
                 System.out.printf("\nProjeto: %s", A.name);
             }   

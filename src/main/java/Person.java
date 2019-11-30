@@ -1,3 +1,5 @@
+import java.util.*;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,7 +19,8 @@ abstract public class Person extends InvestigationCenter{
     //========================================================================//
     //========================================================================//
     String name, email;
-
+    double Salary;
+    ArrayList<Tasks> tarefas = new ArrayList<Tasks>();
    
     
     //========================================================================//
@@ -60,6 +63,19 @@ abstract public class Person extends InvestigationCenter{
     public void setEmail(String email) {
         this.email = email;
     }
- 
-    abstract double custo();
+    
+    public boolean verifyEffor(){
+        Tasks A = new Tasks();
+        double effort=0;
+        for(int i=0;i<tarefas.size();i++){
+                A = tarefas.get(i);
+                effort+=A.effort();
+        }
+        if(effort>=1){
+            return false;       //nao pode ter mais tarefas
+        }else{
+            return true;        //pode ter mais tarefas
+        }
+    }
+    abstract void cost();
 }
