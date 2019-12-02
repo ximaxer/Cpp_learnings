@@ -8,14 +8,14 @@ public class Project extends InvestigationCenter {
     //============================             ===============================//
     //========================================================================//
     //========================================================================//  
-    ArrayList<Docent> docents = new ArrayList<Docent>();
-    ArrayList<Grantee> grantees = new ArrayList<Grantee>();
-    ArrayList<Task> tasks = new ArrayList<Task>();
-    Person mD;
-    String name, acronym;
-    Date initialDate,finalDate;
-    int estDuration;
-    boolean projectState;
+    private ArrayList<Docent> docents = new ArrayList<Docent>();
+    private ArrayList<Grantee> grantees = new ArrayList<Grantee>();
+    private ArrayList<Task> tasks = new ArrayList<Task>();
+    private Person mD;
+    private String name, acronym;
+    private Date initialDate,finalDate;
+    private int estDuration;
+    private boolean projectState;
     //========================================================================//
     //========================================================================//
     //===========================                =============================//
@@ -37,7 +37,8 @@ public class Project extends InvestigationCenter {
         this.acronym=acronym;
         this.initialDate=initDate;
         this.estDuration=estDuration;
-        this.finalDate=finalDate;
+        this.finalDate=null;
+
     }
     
     //========================================================================//
@@ -68,7 +69,7 @@ public class Project extends InvestigationCenter {
         this.initialDate=initDate;
     }
     
-    public double getEstDuration(){
+    public int getEstDuration(){
         return estDuration;
     }
     public void setEstDuration(int estDuration){
@@ -81,7 +82,15 @@ public class Project extends InvestigationCenter {
     public void setFinalDate(Date finalDate){
         this.finalDate=finalDate;
     }
-    public void DeleteTask(){
-        
+    public void deleteTask(int taskI){
+        tasks.remove(taskI);
+        System.out.printf("\nTask %d deleted with success!", taskI); 
     }
+    public void showTasks(){
+        Task L = new Task();
+        for(int i=0; i<tasks.size();i++){
+        
+        }
+    }
+        
 }
