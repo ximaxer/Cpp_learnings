@@ -86,11 +86,30 @@ public class Project extends InvestigationCenter {
         tasks.remove(taskI);
         System.out.printf("\nTask %d deleted with success!", taskI); 
     }
-    public void showTasks(){
-        Task L = new Task();
+    public void showTaskList(){
+        System.out.println("\nTASKS DESTE PROJETO!");
         for(int i=0; i<tasks.size();i++){
-        
+        System.out.printf("\nTask %s ", tasks.get(i).getTname()); 
         }
     }
+    public void showUnitializedTasks(){
+        System.out.println("\nT")
+        for(int i=0;i<tasks.size();i++){
+            if(tasks.get(i).getProgress==0){
+                
+            }
+        }
+    }
+    public void showDelayedTasks(){
         
+    } 
+    public void showCompletedTasks(){
+        
+    }
+    public void showProjectCost(){
+        
+    }
+    public void terminateProject(){
+        
+    }
 }
