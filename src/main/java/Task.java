@@ -81,12 +81,12 @@ abstract public class Task extends Project{
         return progress;
     }
     
-    public String setResponsible(Person responsible){
+    public void setResponsible(Person responsible){
         this.responsible = responsible ;
     }
     
-    public String getResponsible(){
-        return this.responsible.name;
+    public Person getResponsible(){
+        return this.responsible;
     }
 
     public void setProgress(int progress) {
