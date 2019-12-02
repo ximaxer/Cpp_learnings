@@ -12,7 +12,6 @@ public class Docent extends Person{
     //========================================================================// 
     private int numMecha;
     private String area;
-    private double Income;
     //========================================================================//
     //========================================================================//
     //===========================                =============================//
@@ -25,10 +24,11 @@ public class Docent extends Person{
         this.area=null;
     }
     
-    public Docent(int numMecha, String area, double Income) {
+    public Docent(String name, String email, int numMecha, String area) {
+        super.name = name;
+        super.email = email;
         this.numMecha=numMecha;
         this.area=area;
-        this.Income=Income;
         cost();
     }
     
@@ -57,6 +57,6 @@ public class Docent extends Person{
     
     @Override
     public void cost(){
-        super.Salary=this.Income;
+        super.Salary=0.00;
     }
 }

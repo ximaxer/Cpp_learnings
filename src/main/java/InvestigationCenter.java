@@ -37,32 +37,27 @@ public class InvestigationCenter {
     //========================================================================//
     //========================================================================//
     public void showDelayedP(){
-        Project A = new Project();
         Calendar est = (Calendar)Calendar.getInstance();
         System.out.println("\nPROJETOS ATRASADOS:");
         for(int i=0;i<projects.size();i++){
-            A = projects.get(i);
             
             Calendar currentT = Calendar.getInstance();
-            est.setTime(A.initialDate);
-            est.add(Calendar.MONTH , A.estDuration);
+            est.setTime(projects.get(i).getInitialDate());
+            est.add(Calendar.MONTH , projects.get(i).getEstDuration());
             Date dataEstFinal = est.getTime();    //dataEstFinal -> data inicial + estimated duration
-            Date dataHoje = currentT.getTime();
-            
+            Date dataHoje = currentT.getTime();     
             
             if(dataHoje.compareTo(dataEstFinal)==1){
-                System.out.printf("\nProjeto: %s", A.name);
+                System.out.printf("\nProjeto: %s", projects.get(i).getName());
             }               
         }
     }
     
     public void showFinishedP(){
-        Project A = new Project();
         System.out.println("\nPROJETOS ATRASADOS:");
         for(int i=0;i<projects.size();i++){
-            A = projects.get(i);
-            if(A.finalDate!=null){
-                System.out.printf("\nProjeto: %s", A.name);
+            if(projects.get(i).getFinalDate()!=null){
+                System.out.printf("\nProjeto: %s", projects.get(i).getName());
             }   
         }
     }
