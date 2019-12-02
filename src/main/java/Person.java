@@ -35,11 +35,6 @@ abstract public class Person extends InvestigationCenter{
         this.email = null;
     }
     
-    public Person(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
-    
     //========================================================================//
     //========================================================================//
     //=============================           ================================//
@@ -65,11 +60,9 @@ abstract public class Person extends InvestigationCenter{
     }
     
     public boolean verifyEffor(){
-        Task A = new Task();
         double effort=0;
         for(int i=0;i<tasks.size();i++){
-                A = tasks.get(i);
-                effort+=A.effort();
+                effort+=tasks.get(i).getEffort();
         }
         if(effort>=1){
             return false;       //nao pode ter mais tarefas

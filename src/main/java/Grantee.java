@@ -27,7 +27,9 @@ abstract public class Grantee extends Person{
         this.finalDate = null;
     }
     
-    public Grantee(Date initialDate, Date finalDate) {
+    public Grantee(String name, String email, Date initialDate, Date finalDate) {
+        super.name = name;
+        super.email = email;
         this.initialDate = initialDate;
         this.finalDate = finalDate;
     }
