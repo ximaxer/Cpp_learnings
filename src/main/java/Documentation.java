@@ -1,4 +1,6 @@
-public class Documentation {
+import java.util.*;
+public class Documentation extends Task{
+
     //========================================================================//
     //========================================================================//
     //============================             ===============================//
@@ -16,6 +18,18 @@ public class Documentation {
     //========================================================================//
     //========================================================================//
     
+    public Documentation() {
+    }
+    
+    
+    public Documentation(String name, Date initialTDate, Date finalTDate, int estTDuration, int progress) {
+        super.Tname=name;
+        super.initialTDate=initialTDate;
+        super.finalTDate = finalTDate;
+        super.estTDuration = estTDuration;
+        super.progress=0;
+        super.effort=this.effort();
+    }
     
     //========================================================================//
     //========================================================================//
@@ -24,4 +38,9 @@ public class Documentation {
     //=============================           ================================//
     //========================================================================//
     //========================================================================//
+    @Override
+    public double effort(){
+        return 0.25;
+    }
+    
 }

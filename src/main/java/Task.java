@@ -97,6 +97,14 @@ abstract public class Task extends Project{
         }
     }
     
+    public void addTask(Task task){
+        if(responsible.verifyEffort()+task.effort>1){
+            System.out.printf("\nA tarefa %s excede o esforço maximo de %s",task.Tname,responsible.name);
+        }else{
+            responsible.tasks.add(task);
+        }
+    }
+    
 
     @Override
     public String toString() {
