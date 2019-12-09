@@ -41,7 +41,7 @@ public class InvestigationCenter {
     public void showDelayedP(){
         Calendar est = (Calendar)Calendar.getInstance();
         Calendar currentT = Calendar.getInstance();
-        System.out.println("\nPROJETOS ATRASADOS:");
+        System.out.println("\nDELAYED PROJECTS:");
         for(int i=0;i<projects.size();i++){
             if(projects.get(i).getFinalDate()==null){
                 est.setTime(projects.get(i).getInitialDate());
@@ -50,32 +50,34 @@ public class InvestigationCenter {
                 Date dataHoje = currentT.getTime();     
 
                 if(dataHoje.compareTo(dataEstFinal)==1){
-                    System.out.printf("\nProjeto: %s", projects.get(i).getName());
+                    System.out.printf("\nProject: %s", projects.get(i).getName());
                 }               
             }
         }
     }
     
     public void showFinishedP(){
-        System.out.println("\nPROJETOS ATRASADOS:");
+        System.out.println("\nFINISHED PROJECTS:");
         for(int i=0;i<projects.size();i++){
             if(projects.get(i).getFinalDate()!=null){
-                System.out.printf("\nProjeto: %s", projects.get(i).getName());
+                System.out.printf("\nProject: %s", projects.get(i).getName());
             }   
         }
     }
-    
-    public void ReadTasksFromFile(){
+
+
+
+public void ReadProjectFromFile(){
         BufferedReader reader;
         
-        int i = 0, estDuration = 0;
-        String type = "", name = "";
+        int i = 0, est = 0;
         Date date = new Date(0,0,0);
+        String acronym = "", name = "";
         
-        File f = new File("tasks.txt");
-        if(f.exists() && f.isFile()){
+        File personf = new File("C:\\Users\\ximax\\Desktop\\college gomin\\POO\\ProjetoPoo\\Project_list.txt");
+        if(personf.exists() && personf.isFile()){
             try{
-                reader = new BufferedReader(new FileReader(f));
+                reader = new BufferedReader(new FileReader(personf));
                     String line = reader.readLine();
                     while (line != null) {        
                         String[] tokens = line.split("\t");
@@ -84,13 +86,13 @@ public class InvestigationCenter {
                             i++;
                             switch(i){
                                 case 1:
-                                    type = t;
-                                    break;
-                                case 2:
                                     name = t;
                                     break;
+                                case 2:
+                                    acronym = t;
+                                    break;
                                 case 3:
-                                    estDuration= Integer.parseInt(t);
+                                    est = Integer.parseInt(t);
                                     break;
                                 case 4:
                                     try{
@@ -103,14 +105,9 @@ public class InvestigationCenter {
                                     break;
                             } 
                         }
-                        if(type.compareTo("Design")==0){
-                            Design task = new Design(name, date, estDuration);
-                        }else if(type.compareTo("Development")==0){
-                            Development task = new Development(name, date, estDuration);
-                        }else if(type.compareTo("Documentation")==0){
-                            Documentation task = new Documentation(name, date, estDuration);
-                        }
-                        tasks.add(task);
+                        Project project = new Project(name, acronym, date, est);
+                        projects.add(project);
+                        
                         line = reader.readLine();
                         //le a proxima linha e passa à proxime iteração                            
                         //do ciclo com a nova linha
@@ -121,77 +118,12 @@ public class InvestigationCenter {
                 e.printStackTrace();
             }
         }
-    }
-
-
-public void ReadPersonsFromFile(){
-        BufferedReader reader;
-        
-        int i = 0, numMec = 0;
-        String type = "", name = "", email = "", area = "";
-        
-        File personf = new File("Person_list.txt");
-        if(personf.exists() && personf.isFile()){
-            try{
-                reader = new BufferedReader(new FileReader(personf));
-                    String line = reader.readLine();
-                    while (line != null) {        
-                        String[] tokens = line.split("\t");
-                           i=0;
-                        for (String t : tokens){
-                            i++;
-                            switch(i){
-                                case 1:
-                                    type = t;
-                                    break;
-                                case 2:
-                                    name = t;
-                                    break;
-                                case 3:
-                                    email= t;
-                                    break;
-                                case 4:
-                                    numMec= Integer.parseInt(t);
-                                    break;
-                                case 5:
-                                    area = t;
-                                    break;
-                                default:
-                                    break;
-                            } 
-                        }
-                        if(type.compareTo("Graduate")==0){
-                            Graduate grantee = new Graduate(name, email);
-                            grantees.add(grantee);
-                        }else if(type.compareTo("Doctorate")==0){
-                            Doctorate grantee = new Doctorate(name, email);
-                            grantees.add(grantee);
-                        }else if(type.compareTo("Master")==0){
-                            Master grantee = new Master(name, email);
-                            grantees.add(grantee);
-                        }else if(type.compareTo("Docent")==0){
-                            Docent docent = new Docent(name, email, numMec, area);
-                            docents.add(docent);
-                        }
-                        line = reader.readLine();
-                        //le a proxima linha e passa à proxime iteração                            
-                        //do ciclo com a nova linha
-                        //de forma a garantir que a linha não é nula
-                    }
-                    reader.close();
-            }catch(IOException e){
-                e.printStackTrace();
-            }
-        }
-    }
+}
 
 
 
 
-
-
-
-//========================================================================//
+    //========================================================================//
     //========================================================================//
     //=============================            ===============================//
     //=============================    main    ===============================//
