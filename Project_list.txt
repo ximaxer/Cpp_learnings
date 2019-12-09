@@ -1,1 +1,11 @@
-Cleaning Oceans Robot	COR	18	09/05/2019
+Oceans Cleaning Robot	OCR	60	09/05/2019
+Automatic Sewer Cleanage	ASC	65	07/02/2018
+World Wide Free Wifi	WWFW	120	10/12/2016
+Solar Panel Bricks	SPB	60	01/03/2019
+Automatic Vehicles	AV	180	03/02/2012
+Automatic Dishwasher	AD	9	30/06/1999
+Magnetic House Locks	MHL	108	23/11/2017
+Delivery Drone	DD	24	13/08/2018
+Resting Chamber	RC	180	30/02/2015
+Wound Sealing Gel	WSG	84	22/10/2013
+Brain Computer Implant	BCI	480	23/01/2017

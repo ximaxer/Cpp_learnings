@@ -1,3 +1,10 @@
-Design	pagina web	23	05/12/2019
-Documentation	Report	17	07/02/2017
+Design	Robotic Web page	23	05/12/2019
+Documentation	Report of ocean polution	17	07/02/2017
 Development	Bash	12	02/04/2019
+Development	Mobile app	13	14/04/2019
+Documentation	Report bugs	9	01/11/2019
+Design	App layout	2	17/01/2018
+Documentation	Report of luch food	3	19/12/2016
+Design	Web page apperance	4	08/11/2018
+Documentation	Resumee	1	07/12/2015
+Development	Web App	24	05/05/1998
