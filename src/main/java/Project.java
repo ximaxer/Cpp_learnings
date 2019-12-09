@@ -127,7 +127,11 @@ public class Project extends InvestigationCenter {
     public void getProjectCost(){
     double cost=0;
     for(int i =0;i<grantees.size();i++){
-        cost+=grantees.get(i).Salary;
+        for(int j=0;j<tasks.size();j++){
+           if(grantees.get(i).name.compareTo(tasks.get(j).responsible.name)==0){
+            cost+=grantees.get(i).Salary*tasks.get(j).getEstTDuration()*tasks.get(j).getEffort();
+            }
+        }
     }
     System.out.printf("\nProject %s cost:%f",getName(),cost);
     }
