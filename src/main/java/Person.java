@@ -59,16 +59,13 @@ abstract public class Person extends InvestigationCenter{
         this.email = email;
     }
     
-    public boolean verifyEffor(){
+    public double verifyEffort(){
         double effort=0;
         for(int i=0;i<tasks.size();i++){
                 effort+=tasks.get(i).getEffort();
         }
-        if(effort>=1){
-            return false;       //nao pode ter mais tarefas
-        }else{
-            return true;        //pode ter mais tarefas
-        }
+    return effort;
     }
+    
     abstract void cost();
 }

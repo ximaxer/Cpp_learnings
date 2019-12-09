@@ -20,7 +20,7 @@ public class Graduate extends Grantee{
     //========================================================================//
     //========================================================================//  
     ArrayList<Docent> graduateGuides = new ArrayList<Docent>();
-    
+    Project project;
     //========================================================================//
     //========================================================================//
     //===========================                =============================//
@@ -48,6 +48,25 @@ public class Graduate extends Grantee{
     //========================================================================//
     //========================================================================//
 
+    public void addGuide(Docent guide){
+        boolean verificaFeedback=false;
+        for(int i=0; i<guide.projects.size();i++){
+            if (guide.projects.get(i).getName().compareTo(this.project.getName())==0){
+                this.graduateGuides.add(guide);
+                verificaFeedback=true;
+                break;
+            }
+        }
+        if(verificaFeedback==true){
+            System.out.printf("\n%Successfuly added %s as %s's guide.",guide.getName(),this.getName());
+        }else{
+            System.out.printf("\n%s is not working on the same project as %s",guide.getName(),this.getName());
+        }
+        
+        
+    }
+    
+    
     @Override
     public void cost(){
         super.Salary=800.00;
