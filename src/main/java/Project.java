@@ -23,13 +23,14 @@ public class Project extends InvestigationCenter {
     //===========================                =============================//
     //========================================================================//
     //========================================================================//
-    //I DON'T UNDERSTAND WHY WE HAVE TO DO THIS, SO PROB IS WRONG, CAGUEI
+
     public Project(){
         this.name=null;
         this.acronym=null;
         this.initialDate=null;
         this.estDuration=0;
         this.finalDate=null;
+        this.projectState=true;
     }
 
     public Project(String name,String acronym,Date initDate,int estDuration,Date finalDate){
@@ -87,29 +88,50 @@ public class Project extends InvestigationCenter {
         System.out.printf("\nTask %d deleted with success!", taskI); 
     }
     public void showTaskList(){
-        System.out.println("\nTASKS DESTE PROJETO!");
+        System.out.println("\nLISTING TASKS!");
         for(int i=0; i<tasks.size();i++){
-        System.out.printf("\nTask %s ", tasks.get(i).getTname()); 
+        System.out.printf("\nTask %s ", tasks.get(i).getTName()); 
         }
     }
     public void showUnitializedTasks(){
-        System.out.println("\nT")
+        System.out.println("\nLISISTING UNITIALIZED TASKS");
         for(int i=0;i<tasks.size();i++){
-            if(tasks.get(i).getProgress==0){
-                
+            if(tasks.get(i).getProgress()==0){
+                System.out.printf("\nTask %s not initalized", tasks.get(i).getTName());
             }
         }
     }
     public void showDelayedTasks(){
-        
-    } 
-    public void showCompletedTasks(){
-        
+        System.out.println("\nLISTING DELAYED TASKS");
+        Calendar est = (Calendar)Calendar.getInstance();
+        for(int i=0;i<tasks.size();i++){
+            Calendar currentT = Calendar.getInstance();
+            est.setTime(tasks.get(i).initialTDate);
+            est.add(Calendar.MONTH , tasks.get(i).estTDuration);
+            Date dataEstFinal = est.getTime();    //dataEstFinal -> data inicial + estimated duration
+            Date dataHoje = currentT.getTime();     
+            if(dataHoje.compareTo(dataEstFinal)==1){
+                System.out.printf("\n Task: %s delayed", tasks.get(i).Tname);
+            }               
+        }
     }
-    public void showProjectCost(){
-        
+    
+    public void showCompletedTasks(){
+    System.out.println("\nLISTING COMPLETED TASKS");
+    for(int i = 0;i<tasks.size();i++){
+        if(tasks.get(i).getFinalTDate().compareTo(null)!=0){
+            System.out.printf("\n Task: %d completed",tasks.get(i).getFinalTDate());
+        }
+    }
+    }
+    public void getProjectCost(){
+    double cost=0;
+    for(int i =0;i<grantees.size();i++){
+        cost+=grantees.get(i).Salary;
+    }
+    System.out.printf("\nProject %s cost:%f",getName(),cost);
     }
     public void terminateProject(){
-        
+        this.projectState=false;
     }
 }
