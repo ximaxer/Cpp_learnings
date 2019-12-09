@@ -22,10 +22,10 @@ public class Documentation extends Task{
     }
     
     
-    public Documentation(String name, Date initialTDate, Date finalTDate, int estTDuration, int progress) {
+    public Documentation(String name, Date initialTDate, int estTDuration) {
         super.Tname=name;
         super.initialTDate=initialTDate;
-        super.finalTDate = finalTDate;
+        super.finalTDate = null;
         super.estTDuration = estTDuration;
         super.progress=0;
         super.effort=this.effort();
