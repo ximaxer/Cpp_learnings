@@ -1,6 +1,10 @@
-
+import java.text.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.awt.*;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -12,34 +16,77 @@ import java.awt.event.*;
  * @author ximax
  */
 public class ProjectAddFrame {
-        private JLabel labelInput, labelResult;
-        private JTextField textFieldInput,textFieldResult;
-        private JButton buttonConvert;
+        private JLabel ProjectNameLabel, IDateLabel, AcronymLabel, estDurationLabel;
+        private JTextField ProjectNameInput, AcronymInput, IDateInput, estDurationInput;
+        private JButton addButton;
         private JPanel panel= new JPanel();
         private JFrame f = new JFrame("Add Project");
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 	
-	public ProjectAddFrame() {
+	public ProjectAddFrame(ArrayList<Project> ProjectList) {
+            f.setLayout(new GridBagLayout());
+            panel.setLayout(new GridBagLayout());
+            GridBagConstraints c = new GridBagConstraints();
             
-            labelInput=new JLabel ("Celsius:");
-            labelInput.setBounds(10,10,100,25);
-            textFieldInput=new JTextField(10);
-            textFieldInput.setBounds(110,10,150,25);
-            labelResult=new JLabel("Fahrenheit:");
-            labelResult.setBounds(10,40,100,25);
-            textFieldResult=new JTextField(10);
-            textFieldResult.setBounds(110,40,150,25);
-            textFieldResult.setEditable(false);
-            buttonConvert = new JButton("Converter");
-            buttonConvert.setBounds(110,70,150,25);
-
+            
+            ProjectNameLabel=new JLabel ("Project Name:");
+            c.insets = new Insets(0,10,0,0);
+            c.gridx = 1;      
+            c.gridy = 1;
+            panel.add(ProjectNameLabel,c);
+            
+            ProjectNameInput=new JTextField(10);
+            c.ipady = 5; 
+            c.gridx = 2;
+            c.gridy = 1;
+            panel.add(ProjectNameInput,c);
+            
+            AcronymLabel=new JLabel("Acronym:");
+            c.gridx = 1;      
+            c.gridy = 2;
+            panel.add(AcronymLabel,c);
+            
+            AcronymInput=new JTextField(10);
+            c.ipady = 5;
+            c.gridx = 2;
+            c.gridy = 2;
+            panel.add(AcronymInput,c);
+            
+            
+            IDateLabel=new JLabel("Initial Date:");
+            c.gridx = 1;      
+            c.gridy = 3;
+            panel.add(IDateLabel,c);
+            
+            IDateInput=new JTextField(10);
+            c.ipady = 5;
+            c.gridx = 2;
+            c.gridy = 3;
+            panel.add(IDateInput,c);
+            
+            
+            estDurationLabel=new JLabel("Estimated Duration:");
+            c.gridx = 1;      
+            c.gridy = 4;
+            panel.add(estDurationLabel,c);
+            
+            estDurationInput=new JTextField(10);
+            c.ipady = 5;
+            c.gridx = 2;
+            c.gridy = 4;
+            panel.add(estDurationInput,c);
+            
+            addButton = new JButton("Adicionar");
+            c.ipady = 0;       //reset to default
+            c.gridy = 5;
+            panel.add(addButton,c);
+            
+            
             AddBListener listener=new AddBListener();
-            buttonConvert.addActionListener(listener);
-            panel.add(labelInput);
-            panel.add(textFieldInput);
-            panel.add(labelResult);
-            panel.add(textFieldResult);
-            panel.add(buttonConvert);
-            f.add(panel);
+            addButton.addActionListener(listener);
+            
+            
+            f.add(panel, new GridBagConstraints());
             f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             f.setSize(300,300);
             f.setVisible(true);
@@ -47,14 +94,20 @@ public class ProjectAddFrame {
         
         private class AddBListener implements ActionListener{
             @Override
+            
             public void actionPerformed(ActionEvent e){
                 try{
-                    String input = textFieldInput.getText();
-                    double celsius = Double.parseDouble(input);
-                    double fahr =(1.8*celsius)+32;
-                    textFieldResult.setText(String.format("%.2f", fahr));
-                }catch(NumberFormatException ex){
-                    JOptionPane.showMessageDialog(null,"errooooou","janela name",JOptionPane.ERROR_MESSAGE);
+                    String Projectname = ProjectNameInput.getText();
+                    String ProjectAcronym = AcronymInput.getText();
+                    String InitialDate = IDateInput.getText();
+                    Date FormatedDate=new SimpleDateFormat("dd/MM/yyyy").parse(InitialDate); 
+                    String estDuration = estDurationInput.getText();
+                    int FormatedEstDuration = Integer.parseInt(estDuration);
+                    Project newProject = new Project(Projectname, ProjectAcronym, FormatedDate, FormatedEstDuration);
+                    ProjectList.add(newProject);
+                
+                } catch (ParseException ex) {
+                    JOptionPane.showMessageDialog(null,"piça","janela name",JOptionPane.INFORMATION_MESSAGE);;
                 }
             }
             

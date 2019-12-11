@@ -31,7 +31,7 @@ public class landingScreen extends JPanel
         gProjectList=ProjectList;
         listModel = new DefaultListModel();
         for(int i=0;i<ProjectList.size();i++)
-        listModel.addElement(ProjectList.get(i).getName());
+        listModel.addElement(gProjectList.get(i).getName());
 
         
         list = new JList(listModel);
@@ -99,7 +99,7 @@ public class landingScreen extends JPanel
         //Required by ActionListener.
         @Override
         public void actionPerformed(ActionEvent e) {
-            ProjectAddFrame projectAddition = new ProjectAddFrame();
+            ProjectAddFrame projectAddition = new ProjectAddFrame(gProjectList);
             
         }
     }
