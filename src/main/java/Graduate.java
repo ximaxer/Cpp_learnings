@@ -58,7 +58,7 @@ public class Graduate extends Grantee{
             }
         }
         if(verificaFeedback==true){
-            System.out.printf("\n%Successfuly added %s as %s's guide.",guide.getName(),this.getName());
+            System.out.printf("\nSuccessfuly added %s as %s's guide.",guide.getName(),this.getName());
         }else{
             System.out.printf("\n%s is not working on the same project as %s",guide.getName(),this.getName());
         }

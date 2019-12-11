@@ -28,6 +28,7 @@ public class Development extends Task{
         super.estTDuration = estTDuration;
         super.progress=0;
         super.effort=this.effort();
+        super.responsible = null;
     }
     
     //========================================================================//

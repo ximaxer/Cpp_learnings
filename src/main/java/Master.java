@@ -20,7 +20,7 @@ public class Master extends Grantee{
     //========================================================================//
     //========================================================================//
     ArrayList<Docent> masterGuides = new ArrayList<Docent>();
-    
+    Project project;
     //========================================================================//
     //========================================================================//
     //===========================                =============================//
@@ -47,6 +47,22 @@ public class Master extends Grantee{
     //=============================           ================================//
     //========================================================================//
     //========================================================================//
+public void addGuide(Docent guide){
+        boolean verificaFeedback=false;
+        for(int i=0; i<guide.projects.size();i++){
+            if (guide.projects.get(i).getName().compareTo(this.project.getName())==0){
+                this.masterGuides.add(guide);
+                verificaFeedback=true;
+                break;
+            }
+        }
+        if(verificaFeedback==true){
+            System.out.printf("\nSuccessfuly added %s as %s's guide.",guide.getName(),this.getName());
+        }else{
+            System.out.printf("\n%s is not working on the same project as %s",guide.getName(),this.getName());
+        }        
+    }
+
 
     @Override
     public void cost(){

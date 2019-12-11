@@ -1,6 +1,8 @@
 import java.util.*;
 import java.io.*;
 import java.text.*;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 
 public class InvestigationCenter {
     //========================================================================//
@@ -11,7 +13,6 @@ public class InvestigationCenter {
     //========================================================================//
     //========================================================================//
     ArrayList<Project> projects = new ArrayList<Project>();
-    
     
     
     
@@ -131,7 +132,22 @@ public void ReadProjectFromFile(){
     //========================================================================//
     //========================================================================//
     public static void main(String[] args) {
-        
+        InvestigationCenter IC = new InvestigationCenter();
+        IC.ReadProjectFromFile();
+        JFrame frame = new JFrame("landingScreen");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        //Create and set up the content pane.
+        JComponent newContentPane = new landingScreen(IC.projects);
+        newContentPane.setOpaque(true); //content panes must be opaque
+        frame.setContentPane(newContentPane);
+
+        //Display the window.
+        frame.pack();
+        frame.setVisible(true);
+            //frame.setSize(600,600);// x, y
+            //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //frame.setVisible(true);
     }
     
 }

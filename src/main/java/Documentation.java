@@ -29,6 +29,7 @@ public class Documentation extends Task{
         super.estTDuration = estTDuration;
         super.progress=0;
         super.effort=this.effort();
+        super.responsible = null;
     }
     
     //========================================================================//
@@ -42,5 +43,4 @@ public class Documentation extends Task{
     public double effort(){
         return 0.25;
     }
-    
 }

@@ -1,5 +1,5 @@
 import java.util.*;
-abstract public class Task extends Project{
+abstract public class Task{
 
     //========================================================================//
     //========================================================================//
@@ -28,6 +28,7 @@ abstract public class Task extends Project{
         this.finalTDate = null;
         this.estTDuration = 0;
         this.progress = 0;
+        this.responsible = null;
         
     }
     //========================================================================//
@@ -103,6 +104,17 @@ abstract public class Task extends Project{
         }else{
             responsible.tasks.add(task);
         }
+    }
+    
+    public int finalDurationMonths(){
+        Calendar startCalendar = new GregorianCalendar();
+        Calendar endCalendar = new GregorianCalendar();
+        startCalendar.setTime(this.initialTDate);
+        endCalendar.setTime(this.initialTDate);
+
+        int diffYear = endCalendar.get(Calendar.YEAR) - startCalendar.get(Calendar.YEAR);
+        int diffMonth = diffYear * 12 + endCalendar.get(Calendar.MONTH) - startCalendar.get(Calendar.MONTH);
+        return diffMonth;
     }
     
 

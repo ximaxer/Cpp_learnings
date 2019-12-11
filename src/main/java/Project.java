@@ -149,64 +149,67 @@ public class Project extends InvestigationCenter {
 
 
 public void ReadPersonsFromFile(){
-        BufferedReader reader;
-        
-        int i = 0, numMec = 0;
-        String type = "", name = "", email = "", area = "";
-        
-        File personf = new File("C:\\Users\\ximax\\Desktop\\college gomin\\POO\\ProjetoPoo\\Person_list.txt");
-        if(personf.exists() && personf.isFile()){
-            try{
-                reader = new BufferedReader(new FileReader(personf));
-                    String line = reader.readLine();
-                    while (line != null) {        
-                        String[] tokens = line.split("\t");
-                           i=0;
-                        for (String t : tokens){
-                            i++;
-                            switch(i){
-                                case 1:
-                                    type = t;
-                                    break;
-                                case 2:
-                                    name = t;
-                                    break;
-                                case 3:
-                                    email= t;
-                                    break;
-                                case 4:
-                                    numMec= Integer.parseInt(t);
-                                    break;
-                                case 5:
-                                    area = t;
-                                    break;
-                                default:
-                                    break;
-                            } 
-                        }
-                        if(type.compareTo("Graduate")==0){
-                            Graduate grantee = new Graduate(name, email);
-                            grantees.add(grantee);
-                        }else if(type.compareTo("Doctorate")==0){
-                            Doctorate grantee = new Doctorate(name, email);
-                            grantees.add(grantee);
-                        }else if(type.compareTo("Master")==0){
-                            Master grantee = new Master(name, email);
-                            grantees.add(grantee);
-                        }else if(type.compareTo("Docent")==0){
-                            Docent docent = new Docent(name, email, numMec, area);
-                            docents.add(docent);
-                        }
-                        line = reader.readLine();
-                        //le a proxima linha e passa à proxime iteração                            
-                        //do ciclo com a nova linha
-                        //de forma a garantir que a linha não é nula
+    BufferedReader reader;
+
+    int i = 0, numMec = 0;
+    String type = "", name = "", email = "", area = "";
+
+    File personf = new File("C:\\Users\\ximax\\Desktop\\college gomin\\POO\\ProjetoPoo\\Person_list.txt");
+    if(personf.exists() && personf.isFile()){
+        try{
+            reader = new BufferedReader(new FileReader(personf));
+                String line = reader.readLine();
+                while (line != null) {        
+                    String[] tokens = line.split("\t");
+                       i=0;
+                    for (String t : tokens){
+                        i++;
+                        switch(i){
+                            case 1:
+                                type = t;
+                                break;
+                            case 2:
+                                name = t;
+                                break;
+                            case 3:
+                                email= t;
+                                break;
+                            case 4:
+                                numMec= Integer.parseInt(t);
+                                break;
+                            case 5:
+                                area = t;
+                                break;
+                            default:
+                                break;
+                        } 
                     }
-                    reader.close();
-            }catch(IOException e){
-                e.printStackTrace();
-            }
+                    if(type.compareTo("Graduate")==0){
+                        Graduate grantee = new Graduate(name, email);
+                        grantees.add(grantee);
+                    }else if(type.compareTo("Doctorate")==0){
+                        Doctorate grantee = new Doctorate(name, email);
+                        grantees.add(grantee);
+                    }else if(type.compareTo("Master")==0){
+                        Master grantee = new Master(name, email);
+                        grantees.add(grantee);
+                    }else if(type.compareTo("Docent")==0){
+                        Docent docent = new Docent(name, email, numMec, area);
+                        docents.add(docent);
+                    }
+                    line = reader.readLine();
+                    //le a proxima linha e passa à proxime iteração                            
+                    //do ciclo com a nova linha
+                    //de forma a garantir que a linha não é nula
+                }
+                reader.close();
+                for(i=0; i<grantees.size();i++){
+        System.out.printf("\nPerson %d:%s ", i+1, grantees.get(i).getName()); 
         }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+    }
 }
 
     
@@ -218,7 +221,7 @@ public void ReadPersonsFromFile(){
     public void showTaskList(){
         System.out.println("\nLISTING TASKS!");
         for(int i=0; i<tasks.size();i++){
-        System.out.printf("\nTask %s ", tasks.get(i).getTName()); 
+        System.out.printf("\nTask %d:%s ", i+1, tasks.get(i).getTName()); 
         }
     }
     public void showUnitializedTasks(){
@@ -246,11 +249,11 @@ public void ReadPersonsFromFile(){
     
     public void showCompletedTasks(){
     System.out.println("\nLISTING COMPLETED TASKS");
-    for(int i = 0;i<tasks.size();i++){
-        if(tasks.get(i).getFinalTDate().compareTo(null)!=0){
-            System.out.printf("\n Task: %d completed",tasks.get(i).getFinalTDate());
+        for(int i = 0;i<tasks.size();i++){
+            if(tasks.get(i).getFinalTDate().compareTo(null)!=0){
+                System.out.printf("\n Task: %d completed",tasks.get(i).getFinalTDate());
+            }
         }
-    }
     }
     public void getProjectCost(){
     double cost=0;

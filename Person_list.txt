@@ -2,7 +2,7 @@ Master	Joao Calhau	uc2016255704@student.uc.pt
 Doctorate	Taty Simoes	uc2018285812@student.uc.pt
 Docent	Barbara Goncalves	uc2018295452@student.uc.pt	1	Software
 Graduate	Sofia Meireles	uc2018296218@student.uc.pt
-Graduate	Sofia Silva	uc2018292390@student.uc.pt
+Graduate	Sofia Silva	uc2018293871@student.uc.pt
 Docent	Alberto Santos	uc2013233458@student.uc.pt	2	Seguranca
 Doctorate	Andre Marcelino	uc2012123765@student.uc.pt
 Master	Rafaela Pereira	uc2009126593@student.uc.pt
