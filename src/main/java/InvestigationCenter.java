@@ -148,7 +148,6 @@ public void ReadPersonsFromFile(){
         }
     }
 }
-
 public void ReadProjectFromFile(){
         BufferedReader reader;
         
@@ -213,18 +212,18 @@ public void ReadProjectFromFile(){
     //========================================================================//
     //========================================================================//
     public static void main(String[] args) {
-        InvestigationCenter IC = new InvestigationCenter();
-        IC.ReadProjectFromFile();
-        IC.ReadPersonsFromFile();
-        for(int i=0;i<IC.projects.size();i++){
-            IC.projects.get(i).ReadTasksFromFile();
+        InvestigationCenter CISUC = new InvestigationCenter();
+        CISUC.ReadProjectFromFile();
+        CISUC.ReadPersonsFromFile();
+        for(int i=0;i<CISUC.projects.size();i++){
+            CISUC.projects.get(i).ReadTasksFromFile();
         }
         
         JFrame frame = new JFrame("landingScreen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
-        JComponent newContentPane = new landingScreen(IC.projects, IC.grantees, IC.docents);
+        JComponent newContentPane = new landingScreen(CISUC.projects, CISUC.grantees, CISUC.docents);
         newContentPane.setOpaque(true); //content panes must be opaque
         frame.setContentPane(newContentPane);
 
