@@ -74,7 +74,7 @@ public class landingScreen extends JPanel
         public void actionPerformed(ActionEvent e) {
             int index = list.getSelectedIndex();
             if(gProjectList.get(index).getName().compareTo(listModel.get(index).toString())==0){
-                ProjectEditFrame projectEdition = new ProjectEditFrame();
+                ProjectEditFrame projectEdition = new ProjectEditFrame(gProjectList.get(index),listModel,index);
                 System.out.printf("%s\n",listModel.get(index).toString());
             }
             int size = listModel.getSize();
