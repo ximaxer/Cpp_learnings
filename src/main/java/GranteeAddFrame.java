@@ -121,15 +121,15 @@ public class GranteeAddFrame {
                 if(nivel.compareTo("Graduate")==0){
                     Graduate newGrantee = new Graduate(name, email, FormatedInitialDate, FormatedFinalDate);
                     gGranteeList.add(newGrantee);
-                    listModel.addElement(newGrantee.getName());
+                    listModel.addElement(newGrantee.getName()+"   "+newGrantee.getClass().getName());
                 }else if(nivel.compareTo("Master")==0){
                     Master newMaster = new Master(name, email, FormatedInitialDate, FormatedFinalDate);                    
                     gGranteeList.add(newMaster);
-                    listModel.addElement(newMaster.getName());
+                    listModel.addElement(newMaster.getName()+"   "+newMaster.getClass().getName());
                 }else if(nivel.compareTo("Doctorate")==0){
                     Doctorate newDoctorate = new Doctorate(name, email, FormatedInitialDate, FormatedFinalDate);
                     gGranteeList.add(newDoctorate);
-                    listModel.addElement(newDoctorate.getName());
+                    listModel.addElement(newDoctorate.getName()+"   "+newDoctorate.getClass().getName());
                 }
                 panel.updateUI();
                 f.dispose();

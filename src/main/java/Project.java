@@ -9,9 +9,9 @@ public class Project extends InvestigationCenter {
     //============================             ===============================//
     //========================================================================//
     //========================================================================//  
-    private ArrayList<Docent> docents = new ArrayList<Docent>();
-    private ArrayList<Grantee> grantees = new ArrayList<Grantee>();
-    private ArrayList<Task> tasks = new ArrayList<Task>();
+    protected ArrayList<Docent> docents = new ArrayList<Docent>();
+    protected ArrayList<Grantee> grantees = new ArrayList<Grantee>();
+    protected ArrayList<Task> tasks = new ArrayList<Task>();
     private Person mD;
     private String name, acronym;
     private Date initialDate,finalDate;

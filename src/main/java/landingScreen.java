@@ -20,6 +20,7 @@ public class landingScreen extends JPanel
     implements ListSelectionListener {
     private JList ProjectListF, DocentListF, GranteeListF;
     private DefaultListModel listaProjetos, listaDocents, listaGrantees;
+    private JLabel ProjectsLabel, DocentsLabel, GranteesLabel;
     
     private JPanel panel= new JPanel();
     private JFrame f = new JFrame("Edit Project");
@@ -43,9 +44,9 @@ public class landingScreen extends JPanel
         listaProjetos.addElement(gProjectList.get(i).getName());
         
         listaGrantees = new DefaultListModel();
-        for(int i=0;i<grantees.size();i++)
-        listaGrantees.addElement(gGrantees.get(i).getName());
-        
+        for(int i=0;i<grantees.size();i++){
+            listaGrantees.addElement(gGrantees.get(i).getName() + "   " + gGrantees.get(i).getClass().getSimpleName());
+        }
         listaDocents = new DefaultListModel();
         for(int i=0;i<docents.size();i++)
         listaDocents.addElement(gDocents.get(i).getName());
@@ -106,6 +107,22 @@ public class landingScreen extends JPanel
 
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(100,75,0,75);
+        ProjectsLabel = new JLabel ("PROJECTS:");
+        DocentsLabel = new JLabel ("DOCENTS:");
+        GranteesLabel = new JLabel ("GRANTEES:");
+        
+        c.gridy = 0;
+        c.gridx = 0;
+        panel.add(ProjectsLabel, c);
+                
+        c.gridx = 1;
+        panel.add(DocentsLabel, c);
+        
+        c.gridx = 2;
+        panel.add(GranteesLabel, c);
+        
+        
+        c.insets = new Insets(10,75,0,75);
         c.gridx = 0;      
         c.gridy = 1;
         panel.add(ProjectScrollPane, c);
