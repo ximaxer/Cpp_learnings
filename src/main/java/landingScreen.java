@@ -99,7 +99,7 @@ public class landingScreen extends JPanel
         //Required by ActionListener.
         @Override
         public void actionPerformed(ActionEvent e) {
-            ProjectAddFrame projectAddition = new ProjectAddFrame(gProjectList);
+            ProjectAddFrame projectAddition = new ProjectAddFrame(gProjectList, listModel);
             
         }
     }
