@@ -13,7 +13,7 @@ public class ProjectEditFrame {
     private JPanel panel= new JPanel();
     private JLabel label;
     private JFrame f = new JFrame("Edit Project options");
-    private JButton buttonEdit,buttonManage;
+    private JButton buttonEdit,bManageTasks,bManagePersonel;
     private DefaultListModel listModel;
     private int index;
     
@@ -40,17 +40,25 @@ public class ProjectEditFrame {
         c.gridy = 2;
         panel.add(buttonEdit,c);
 
-        buttonManage = new JButton("Manage Project");
+        bManageTasks = new JButton("Manage Project");
         c.ipady = 0;       
         c.gridy = 3;
-        panel.add(buttonManage,c);
+        panel.add(bManageTasks,c);
+        
+        bManagePersonel = new JButton("Manage Personel");
+        c.ipady = 0;       
+        c.gridy = 4;
+        panel.add(bManagePersonel,c);
 
 
-        buttonEditListener listener1=new buttonEditListener();
+        buttonEditListener listener1 = new buttonEditListener();
         buttonEdit.addActionListener(listener1);
         
-        buttonManageListener listener2=new buttonManageListener();
-        buttonManage.addActionListener(listener2);
+        bManageTasksListener listener2 = new bManageTasksListener();
+        bManageTasks.addActionListener(listener2);
+        
+        bManagePersonelListener listener3 = new bManagePersonelListener();
+        bManagePersonel.addActionListener(listener3);
          
 
         f.add(panel, new GridBagConstraints());
@@ -65,10 +73,17 @@ public class ProjectEditFrame {
         f.dispose();
         }
     }
-    private class buttonManageListener implements ActionListener{
+    private class bManageTasksListener implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e){
             ProjectManage projectManagement = new ProjectManage(projeto);
+            f.dispose();
+        }    
+    }
+    private class bManagePersonelListener implements ActionListener{
+            @Override
+            public void actionPerformed(ActionEvent e){
+            ManagePersonelFather PersonelManagement = new ManagePersonelFather();
             f.dispose();
         }
            

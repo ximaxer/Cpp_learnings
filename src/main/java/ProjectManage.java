@@ -16,12 +16,13 @@ public class ProjectManage {
     
     public ProjectManage(Project proj) {
         projeto=proj;
-        projeto.ReadTasksFromFile();
         gTaskList=projeto.tasks;
         listModel = new DefaultListModel();
-        for(int i=0;i<projeto.tasks.size();i++){
-            listModel.addElement(projeto.tasks.get(i).getTName());
+        for(int i=0;i<gTaskList.size();i++){
+            System.out.println(gTaskList.get(i).getTName());
+            listModel.addElement(gTaskList.get(i).getTName());
         }
+        System.out.println();
         list = new JList(listModel);
         list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         //list.addListSelectionListener(this)

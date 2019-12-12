@@ -216,6 +216,10 @@ public void ReadProjectFromFile(){
         InvestigationCenter IC = new InvestigationCenter();
         IC.ReadProjectFromFile();
         IC.ReadPersonsFromFile();
+        for(int i=0;i<IC.projects.size();i++){
+            IC.projects.get(i).ReadTasksFromFile();
+        }
+        
         JFrame frame = new JFrame("landingScreen");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
