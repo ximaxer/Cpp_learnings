@@ -42,9 +42,10 @@ public class GranteeAddFrame {
         c.insets = new Insets(0,10,60,0);
         panel.add(ChooseScholarLvl,c);
         
-        GranteeNameLabel=new JLabel ("Grantee Name:");
+        GranteeNameLabel=new JLabel ("Grantee Name:");   
         c.insets = new Insets(0,10,0,0);
         c.gridy = 1;
+        c.gridx = 1; 
         panel.add(GranteeNameLabel,c);
 
         GranteeNameInput=new JTextField(10);
