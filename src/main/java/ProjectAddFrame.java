@@ -31,6 +31,7 @@ public class ProjectAddFrame {
 
 
         ProjectNameLabel=new JLabel ("Project Name:");
+        c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0,10,0,0);
         c.gridx = 1;      
         c.gridy = 1;
@@ -77,7 +78,7 @@ public class ProjectAddFrame {
         c.gridy = 4;
         panel.add(estDurationInput,c);
 
-        addButton = new JButton("Adicionar");
+        addButton = new JButton("Add");
         c.ipady = 0;       //reset to default
         c.gridy = 5;
         panel.add(addButton,c);

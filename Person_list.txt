@@ -1,10 +1,10 @@
-Master	Joao Calhau	uc2016255704@student.uc.pt
-Doctorate	Taty Simoes	uc2018285812@student.uc.pt
+Master	Joao Calhau	uc2016255704@student.uc.pt	05/04/1998	08/05/2040
+Doctorate	Taty Simoes	uc2018285812@student.uc.pt	30/03/2000	08/05/2040
 Docent	Barbara Goncalves	uc2018295452@student.uc.pt	1	Software
-Graduate	Sofia Meireles	uc2018296218@student.uc.pt
-Graduate	Sofia Silva	uc2018293871@student.uc.pt
+Graduate	Sofia Meireles	uc2018296218@student.uc.pt	11/11/2011	15/10/2021
+Graduate	Sofia Silva	uc2018293871@student.uc.pt	13/06/2005	08/07/2030
 Docent	Alberto Santos	uc2013233458@student.uc.pt	2	Seguranca
-Doctorate	Andre Marcelino	uc2012123765@student.uc.pt
-Master	Rafaela Pereira	uc2009126593@student.uc.pt
-Doctorate	Beatriz Meireles	uc2006628500@student.uc.pt
+Doctorate	Andre Marcelino	uc2012123765@student.uc.pt	05/04/1999	16/04/2032
+Master	Rafaela Pereira	uc2009126593@student.uc.pt	28/04/2012	01/04/2073
+Doctorate	Beatriz Meireles	uc2006628500@student.uc.pt	05/03/2003	05/02/2032
 Docent	Joao Maria	uc2015925814@student.uc.pt	3	Hardware

@@ -1,5 +1,5 @@
 
-import java.util.ArrayList;
+import java.util.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,7 +19,7 @@ public class Master extends Grantee{
     //============================             ===============================//
     //========================================================================//
     //========================================================================//
-    ArrayList<Docent> masterGuides = new ArrayList<Docent>();
+    private ArrayList<Docent> masterGuides = new ArrayList<Docent>();
     Project project;
     //========================================================================//
     //========================================================================//
@@ -34,9 +34,11 @@ public class Master extends Grantee{
         cost();
     }
     
-    public Master(String name, String email){
+    public Master(String name, String email, Date idate, Date fdate){
         super.name=name;
         super.email=email;
+        super.initialDate=idate;
+        super.finalDate=fdate;
         cost();
     }
     

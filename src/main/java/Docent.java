@@ -1,7 +1,8 @@
+
+import java.util.ArrayList;
+
 public class Docent extends Person{
-
-    
-
+    protected ArrayList<Project> projects = new ArrayList<Project>();
     
     //========================================================================//
     //========================================================================//

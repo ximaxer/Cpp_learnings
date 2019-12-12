@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import java.util.*;
 /**
  *
  * @author ximax
@@ -31,9 +31,11 @@ public class Doctorate extends Grantee{
         cost();
     }
     
-    public Doctorate(String name, String email){
+    public Doctorate(String name, String email, Date idate, Date fdate){
         super.name=name;
         super.email=email;
+        super.initialDate=idate;
+        super.finalDate=fdate;
         cost();
     }
     

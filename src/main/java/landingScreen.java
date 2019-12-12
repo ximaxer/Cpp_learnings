@@ -18,93 +18,156 @@ import javax.swing.event.*;
 
 public class landingScreen extends JPanel
     implements ListSelectionListener {
-    private JList list;
-    private DefaultListModel listModel;
-
+    private JList ProjectListF, DocentListF, GranteeListF;
+    private DefaultListModel listaProjetos, listaDocents, listaGrantees;
+    
+    private JPanel panel= new JPanel();
+    private JFrame f = new JFrame("Edit Project");
     private static final String addString = "Add";
     private static final String editString = "Edit";
-    private JButton edit, add;
-    ArrayList<Project> gProjectList;
+    private JButton edit, addProject, addDocent, addGrantee;
+    private ArrayList<Project> gProjectList; 
+    private ArrayList<Docent> gDocents;
+    private ArrayList<Grantee> gGrantees;
     
-    public landingScreen(ArrayList<Project> ProjectList) {
-        super(new BorderLayout());
+    public landingScreen(ArrayList<Project> ProjectList, ArrayList<Grantee> grantees, ArrayList<Docent> docents) {
+        super();
+        f.setLayout(new GridBagLayout());
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        gDocents=docents;
+        gGrantees=grantees;
         gProjectList=ProjectList;
-        listModel = new DefaultListModel();
+        listaProjetos = new DefaultListModel();
         for(int i=0;i<ProjectList.size();i++)
-        listModel.addElement(gProjectList.get(i).getName());
+        listaProjetos.addElement(gProjectList.get(i).getName());
+        
+        listaGrantees = new DefaultListModel();
+        for(int i=0;i<grantees.size();i++)
+        listaGrantees.addElement(gGrantees.get(i).getName());
+        
+        listaDocents = new DefaultListModel();
+        for(int i=0;i<docents.size();i++)
+        listaDocents.addElement(gDocents.get(i).getName());
 
         
-        list = new JList(listModel);
-        list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        list.setSelectedIndex(0);
-        list.addListSelectionListener(this);
-        list.setVisibleRowCount(5);
-        JScrollPane listScrollPane = new JScrollPane(list);
+        
+        ProjectListF = new JList(listaProjetos);
+        ProjectListF.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        ProjectListF.addListSelectionListener(this);
+        JScrollPane ProjectScrollPane = new JScrollPane(ProjectListF);
+        Dimension d1 = ProjectListF.getPreferredSize();
+        d1.width = 175;
+        d1.height = 225;
+        ProjectScrollPane.setPreferredSize(d1);
+        
+        GranteeListF = new JList(listaGrantees);
+        GranteeListF.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        GranteeListF.addListSelectionListener(this);
+        JScrollPane GranteeScrollPane = new JScrollPane(GranteeListF);
+        Dimension d2 = GranteeListF.getPreferredSize();
+        d2.width = 175;
+        d2.height = 225;
+        GranteeScrollPane.setPreferredSize(d2);
+        
+        DocentListF = new JList(listaDocents);
+        DocentListF.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        DocentListF.addListSelectionListener(this);
+        JScrollPane DocentScrollPane = new JScrollPane(DocentListF);
+        Dimension d3 = DocentListF.getPreferredSize();
+        d3.width = 175;
+        d3.height = 225;
+        DocentScrollPane.setPreferredSize(d3);
 
 
         edit = new JButton(editString);
         edit.setActionCommand(editString);
         edit.addActionListener(new EditListener());
 
-        add = new JButton(addString);
-        add.setActionCommand(addString);
-        add.addActionListener(new AddListener());
+        addProject = new JButton(addString);
+        addProject.setActionCommand(addString);
+        addProject.addActionListener(new ProjectAddListener());
+        
+        addDocent = new JButton(addString);
+        addDocent.setActionCommand(addString);
+        addDocent.addActionListener(new DocentAddListener());
+        
+        addGrantee = new JButton(addString);
+        addGrantee.setActionCommand(addString);
+        addGrantee.addActionListener(new GranteeAddListener());
         
         
-        String name = listModel.getElementAt(
-                              list.getSelectedIndex()).toString();
+        JPanel ProjectButtonPane = new JPanel();
+        ProjectButtonPane.setLayout(new BoxLayout(ProjectButtonPane, BoxLayout.LINE_AXIS));
+        ProjectButtonPane.add(edit);
+        ProjectButtonPane.add(new JSeparator(SwingConstants.VERTICAL));
+        ProjectButtonPane.add(addProject);
+        ProjectButtonPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 
-        //Create a panel that uses BoxLayout.
-        JPanel buttonPane = new JPanel();
-        buttonPane.setLayout(new BoxLayout(buttonPane,
-                                           BoxLayout.LINE_AXIS));
-        buttonPane.add(edit);
-        buttonPane.add(Box.createHorizontalStrut(5));
-        buttonPane.add(new JSeparator(SwingConstants.VERTICAL));
-        buttonPane.add(Box.createHorizontalStrut(5));
-        buttonPane.add(add);
-        buttonPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
-
-        add(listScrollPane, BorderLayout.CENTER);
-        add(buttonPane, BorderLayout.PAGE_END);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.insets = new Insets(100,75,0,75);
+        c.gridx = 0;      
+        c.gridy = 1;
+        panel.add(ProjectScrollPane, c);
+        
+        c.gridx = 1;
+        panel.add(DocentScrollPane, c);
+        
+        c.gridx = 2; 
+        panel.add(GranteeScrollPane, c);
+        
+        c.insets = new Insets(0,75,0,75);
+        c.gridy = 2; 
+        c.gridx = 0;
+        panel.add(ProjectButtonPane, c);
+        
+        c.gridx = 1;
+        panel.add(addDocent,c);
+        
+        c.gridx = 2;
+        panel.add(addGrantee,c);
+        add(panel, new GridBagConstraints());
     }
 
     class EditListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int index = list.getSelectedIndex();
-            if(gProjectList.get(index).getName().compareTo(listModel.get(index).toString())==0){
-                ProjectEditFrame projectEdition = new ProjectEditFrame(gProjectList.get(index),listModel,index);
-                System.out.printf("%s\n",listModel.get(index).toString());
+            int index = ProjectListF.getSelectedIndex();
+            if(gProjectList.get(index).getName().compareTo(listaProjetos.get(index).toString())==0){
+                ProjectEditFrame projectEdition = new ProjectEditFrame(gProjectList.get(index),listaProjetos,index);
+                System.out.printf("%s\n",listaProjetos.get(index).toString());
             }
-            int size = listModel.getSize();
+            int size = listaProjetos.getSize();
 
-            if (size == 0) { //Nobody's left, disable firing.
+            if (size == 0) { 
                 edit.setEnabled(false);
-
             } else {
-                if (index == listModel.getSize()) {
-                    //removed item in last position
-                    index--;
-                }
-
-                list.setSelectedIndex(index);
-                list.ensureIndexIsVisible(index);
+                ProjectListF.setSelectedIndex(index);
+                ProjectListF.ensureIndexIsVisible(index);
             }
         }
     }
 
-    //This listener is shared by the text field and the hire button.
-    class AddListener implements ActionListener {
-        //Required by ActionListener.
+    class ProjectAddListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ProjectAddFrame projectAddition = new ProjectAddFrame(gProjectList, listModel);
-            
+            ProjectAddFrame projectAddition = new ProjectAddFrame(gProjectList, listaProjetos);  
         }
     }
-
-    //This method is required by ListSelectionListener.
+    
+    class DocentAddListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            DocentAddFrame docentAddition = new DocentAddFrame(gDocents, listaDocents);  
+        }
+    }
+    
+    class GranteeAddListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            GranteeAddFrame granteeAddition = new GranteeAddFrame(gGrantees, listaGrantees);  
+        }
+    }
 
     /**
      *
@@ -114,102 +177,13 @@ public class landingScreen extends JPanel
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting() == false) {
 
-            if (list.getSelectedIndex() == -1) {
-            //No selection, disable fire button.
+            if (ProjectListF.getSelectedIndex() == -1) {
                 edit.setEnabled(false);
 
             } else {
-            //Selection, enable the fire button.
                 edit.setEnabled(true);
             }
         }
     }
-
-    /**
-     * Create the GUI and show it.  For thread safety,
-     * this method should be invoked from the
-     * event-dispatching thread.
-     */
-    /*private static void createAndShowGUI() {
-        //Create and set up the window.
-        JFrame frame = new JFrame("landingScreen");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //Create and set up the content pane.
-        JComponent newContentPane = new landingScreen();
-        newContentPane.setOpaque(true); //content panes must be opaque
-        frame.setContentPane(newContentPane);
-
-        //Display the window.
-        frame.pack();
-        frame.setVisible(true);
-    }*/
-
-    }
-    
-    
-    /*public void alandingScreen(){
-        //super(); // extends Jframe
-        panel=new JPanel();
-        panel.setLayout(null);
-        labelInput=new JLabel ("PISSUS");
-        textFieldInput=new JTextField(10);
-        textFieldInput.setBounds(110,10,150,25);
-        labelResult=new JLabel("ERECTUS");
-        labelResult.setBounds(10,40,100,25);
-        textFieldResult=new JTextField(10);
-        textFieldResult.setBounds(110,40,150,25);
-        textFieldResult.setEditable(false);
-        buttonConvert = new JButton("Converter");
-        buttonConvert.setBounds(110,70,150,25);
-       
-        
-        JTextField jt = new JTextField("TYPE", 10);
-        JScrollPane myScrollPane = new JScrollPane(jt); 
-        panel.add(myScrollPane);
-
-        setContentPane(myScrollPane);
-        
-        ButtonListener listener=new ButtonListener();
-        buttonConvert.addActionListener(listener);
-        panel.add(labelInput);
-        panel.add(textFieldInput);
-        panel.add(labelResult);
-        panel.add(textFieldResult);
-        panel.add(buttonConvert);
-        this.add(panel);
-        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        Rectangle bounds = env.getMaximumWindowBounds();
-        System.out.println("Screen Bounds: " + bounds);
-
-        
-        
-        panel.setVisible(true);
-        this.getRootPane().addComponentListener(new ComponentAdapter() {
-            public void componentResized(ComponentEvent e) {
-                GraphicsDevice screen = env.getDefaultScreenDevice();
-                GraphicsConfiguration config = screen.getDefaultConfiguration();
-                labelInput.setBounds(panel.getWidth()-100,panel.getHeight()-25,100,25);
-                //labelInput.setFont(new Font("Serif",Font.BOLD,3*(((panel.getHeight()+panel.getWidth())/100))));
-                System.out.printf("Y : %d X : %d\n", panel.getHeight(), panel.getWidth());
-                
-            }
-        });
-    }
-        private class ButtonListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent e){
-            try{
-                String input = textFieldInput.getText();
-                double celsius = Double.parseDouble(input);
-                double fahr =(1.8*celsius)+32;
-                textFieldResult.setText(String.format("%.2f", fahr));
-            }catch(NumberFormatException ex){
-                JOptionPane.showMessageDialog(null,"errooooou","janela name",JOptionPane.ERROR_MESSAGE);
-            }
-        }
-            
-            
-        }
-    */
+}
     

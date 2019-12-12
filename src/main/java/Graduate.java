@@ -1,6 +1,5 @@
 
-import java.util.ArrayList;
-
+import java.util.*;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -34,9 +33,11 @@ public class Graduate extends Grantee{
         cost();
     }
     
-    public Graduate(String name, String email){
+    public Graduate(String name, String email, Date idate, Date fdate){
         super.name=name;
         super.email=email;
+        super.initialDate=idate;
+        super.finalDate=fdate;
         cost();
     }
     
