@@ -12,12 +12,11 @@ public class ProjectManage {
     private Project projeto;
     private JLabel label;
     private JPanel panel= new JPanel();
-    private JFrame f = new JFrame("Manage Project"), f3 = new JFrame("list completed");
+    private JFrame f = new JFrame("Manage Project"), f2 = new JFrame("list completed"),f3 = new JFrame("not initialized"),f4 = new JFrame("delayed tasks");
     ArrayList<Task> gTaskList,copyTaskList=new ArrayList<Task>() ;
-    private DefaultListModel listaTasks, compTasks;
-    private JList taskList;
+    private DefaultListModel listaTasks, compTasks,notITasks, dTasks;
+    private JList taskList,complTasks,notInitTasks,delTasks;
     private JButton finalize, add, remove,assignTask,listCompTasks,listNotInitTasks,listDelayedTasks;
-    
     public ProjectManage(Project proj) {
         projeto=proj;
         gTaskList=projeto.tasks;
@@ -27,6 +26,7 @@ public class ProjectManage {
         }
         taskList = new JList(listaTasks);
         taskList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        taskList.addListSelectionListener(new taskAlreadyAssignedListener());
         JScrollPane listScrollPane = new JScrollPane(taskList);
 
  
@@ -44,7 +44,7 @@ public class ProjectManage {
         
         assignTask = new JButton("assign task");
         assignTask.setActionCommand("assign ask");
-        //assignTask.addActionListener(new AssignListener());
+        assignTask.addActionListener(new AssignListener());
         
         listCompTasks = new JButton("list completed");
         listCompTasks.setActionCommand("list completed");
@@ -52,11 +52,11 @@ public class ProjectManage {
         
         listNotInitTasks = new JButton("list not initialized");
         listNotInitTasks.setActionCommand("list not initialized");
-        //listNotInitTasks.addActionListener(new ListNotInitTasksListener());
+        listNotInitTasks.addActionListener(new ListNotInitTasksListener());
         
         listDelayedTasks = new JButton("list delayed");
         listDelayedTasks.setActionCommand("list delayed");
-        //listDelayedTasks.addActionListener(new ListDelayedTasksListener());
+        listDelayedTasks.addActionListener(new ListDelayedTasksListener());
        
         //Create a panel that uses BoxLayout.
         JPanel buttonPane1 = new JPanel();
@@ -92,7 +92,19 @@ public class ProjectManage {
         f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
        
     }
-        
+    class taskAlreadyAssignedListener implements ListSelectionListener {
+        @Override
+        public void valueChanged(ListSelectionEvent e) { 
+            int taskAssignI;
+            taskAssignI=taskList.getSelectedIndex();
+            if(gTaskList.get(taskAssignI).responsible!=null){
+                assignTask.setEnabled(false);
+            }
+            else{
+            assignTask.setEnabled(true);
+            }
+        }
+    }
         
     private class FinalizeListener implements ActionListener{
         @Override
@@ -133,18 +145,19 @@ public class ProjectManage {
         }
     
     }
-    /*private class AssignListener implements ActionListener{
+    private class AssignListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
            
                 
         }
     
-    }*/
+    }
     private class ListCompTasksListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
             try{
+                copyTaskList.clear();
                 for(int i=0;i<gTaskList.size();i++){
                     if(gTaskList.get(i).getProgress()==100){
                         copyTaskList.add(gTaskList.get(i));
@@ -157,12 +170,11 @@ public class ProjectManage {
                     for(int j=0;j<copyTaskList.size();j++){
                         compTasks.addElement(copyTaskList.get(j).getTName());
                     }
-                    taskList = new JList(compTasks);
-                    //JScrollPane listScrollPane = new JScrollPane(taskList);
-                    f3.add(taskList, BorderLayout.CENTER);
-                    f3.setSize(300,300);
-                    f3.setVisible(true);
-                    f3.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    complTasks = new JList(compTasks);
+                    f2.add(complTasks, BorderLayout.CENTER);
+                    f2.setSize(300,300);
+                    f2.setVisible(true);
+                    f2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                 }
                 else{
                     throw new IllegalArgumentException();
@@ -177,18 +189,72 @@ public class ProjectManage {
     private class ListNotInitTasksListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-
+            try{
+                copyTaskList.clear();
+                for(int i=0;i<gTaskList.size();i++){
+                    if(gTaskList.get(i).getProgress()==0){
+                        copyTaskList.add(gTaskList.get(i));
+                        
+                    }
+                }
+                if(copyTaskList.size()!=0){
+                    
+                    notITasks = new DefaultListModel();
+                    for(int j=0;j<copyTaskList.size();j++){
+                        notITasks.addElement(copyTaskList.get(j).getTName());
+                    }
+                    notInitTasks = new JList(notITasks);
+                    f3.add(notInitTasks, BorderLayout.CENTER);
+                    f3.setSize(300,300);
+                    f3.setVisible(true);
+                    f3.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                }
+                else{
+                    throw new IllegalArgumentException();
+                }
+            }
+            catch(IllegalArgumentException ex){
+            JOptionPane.showMessageDialog(null,"Error, all the tasks have been initialized!","Error",JOptionPane.INFORMATION_MESSAGE);
+            }
 
         }
 
     }
-    /*
     private class ListDelayedTasksListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
+            try{copyTaskList.clear();
+                Calendar est = (Calendar)Calendar.getInstance();
+                for(int i=0;i<gTaskList.size();i++){
+                    Calendar currentT = Calendar.getInstance();
+                    est.setTime(gTaskList.get(i).initialTDate);
+                    est.add(Calendar.MONTH , gTaskList.get(i).estTDuration);
+                    Date dataEstFinal = est.getTime();    //dataEstFinal -> data inicial + estimated duration
+                    Date dataHoje = currentT.getTime();     
+                    if(dataHoje.compareTo(dataEstFinal)>0 ){
+                        copyTaskList.add(gTaskList.get(i));
 
-
+                    }               
+                }
+                if(copyTaskList.size()!=0){
+                    dTasks = new DefaultListModel();
+                    for(int j=0;j<copyTaskList.size();j++){
+                        dTasks.addElement(copyTaskList.get(j).getTName());
+                    }
+                    delTasks = new JList(dTasks);
+                    f4.add(delTasks, BorderLayout.CENTER);
+                    f4.setSize(300,300);
+                    f4.setVisible(true);
+                    f4.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    }
+                else{
+                    throw new IllegalArgumentException();
+                }
+            }
+            catch(IllegalArgumentException ex){
+            JOptionPane.showMessageDialog(null,"Error, there are no delayed tasks!","Error",JOptionPane.INFORMATION_MESSAGE);
+            }
         }
 
-    }*/
+    }
 }
