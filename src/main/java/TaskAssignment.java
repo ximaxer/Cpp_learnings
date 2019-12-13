@@ -32,7 +32,6 @@ public class TaskAssignment {
     TaskAssignment(Project project, int index){
         projeto=project;
         taskIndex= index;
-        System.out.println("cona");
         listaDocents = new DefaultListModel();
         listaGrantees = new DefaultListModel();
         for(int x=0;x<project.docents.size();x++)listaDocents.addElement(project.docents.get(x).getName());
@@ -69,14 +68,14 @@ public class TaskAssignment {
         c.gridx = 1;
         panel.add(GranteesScrollPane,c);
 
-        assignGranteeButton = new JButton("Assign Grantee");
+        assignDocentButton = new JButton("Assign Docent");
         c.gridx = 0;
         c.gridy = 1;
-        panel.add(assignGranteeButton,c);
-        
-        assignDocentButton = new JButton("Assign Docent");
-        c.gridx = 1;
         panel.add(assignDocentButton,c);
+        
+        assignGranteeButton = new JButton("Assign Grantee");
+        c.gridx = 1;
+        panel.add(assignGranteeButton,c);
 
         GranteeListListener assignGranteeBListener=new GranteeListListener();
         assignGranteeButton.addActionListener(assignGranteeBListener);
@@ -95,11 +94,20 @@ public class TaskAssignment {
     private class GranteeListListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            int granteeIndex = GranteesJList.getSelectedIndex();
-            if(projeto.grantees.get(granteeIndex).verifyEffort()+projeto.tasks.get(taskIndex).getEffort()<=1){
-                projeto.grantees.get(granteeIndex).tasks.add(projeto.tasks.get(taskIndex));
-                projeto.tasks.get(taskIndex).responsible=projeto.grantees.get(granteeIndex);
-                f.dispose();
+            try{
+                int granteeIndex = GranteesJList.getSelectedIndex();
+                if(projeto.grantees.get(granteeIndex).verifyEffort()+projeto.tasks.get(taskIndex).getEffort()<=1){
+                    projeto.grantees.get(granteeIndex).tasks.add(projeto.tasks.get(taskIndex));
+                    projeto.tasks.get(taskIndex).responsible=projeto.grantees.get(granteeIndex);
+                    f.dispose();
+                }
+                else{
+                    throw new IllegalArgumentException();
+                }
+            
+            }
+            catch(IllegalArgumentException ex){
+            JOptionPane.showMessageDialog(null,"Error, this grantee can't receive that task, too much work!","Error",JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
@@ -108,13 +116,20 @@ public class TaskAssignment {
     private class DocentListListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-            int docentIndex = DocentsJList.getSelectedIndex();  
-            if(projeto.docents.get(docentIndex).verifyEffort()+projeto.tasks.get(taskIndex).getEffort()<=1){
-                projeto.docents.get(docentIndex).tasks.add(projeto.tasks.get(taskIndex));
-                projeto.tasks.get(taskIndex).responsible=projeto.docents.get(docentIndex);
-                f.dispose();
+            try{
+                int docentIndex = DocentsJList.getSelectedIndex();
+                if(projeto.docents.get(docentIndex).verifyEffort()+projeto.tasks.get(taskIndex).getEffort()<=1){
+                    projeto.docents.get(docentIndex).tasks.add(projeto.tasks.get(taskIndex));
+                    projeto.tasks.get(taskIndex).responsible=projeto.docents.get(docentIndex);
+                    f.dispose();
+                }
+            else{
+                    throw new IllegalArgumentException();
+                }
+            }
+            catch(IllegalArgumentException ex){
+            JOptionPane.showMessageDialog(null,"Error, this docent can't receive that task, too much work!","Error",JOptionPane.INFORMATION_MESSAGE);
             }
         }
-    
     }
 }

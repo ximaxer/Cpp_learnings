@@ -57,6 +57,7 @@ public class landingScreen extends JPanel
         ProjectListF.setSelectedIndex(0);
         ProjectListF.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         ProjectListF.addListSelectionListener(this);
+        ProjectListF.addListSelectionListener(new projectAlreadyFinnishedListener());
         JScrollPane ProjectScrollPane = new JScrollPane(ProjectListF);
         Dimension d1 = ProjectListF.getPreferredSize();
         d1.width = 175;
@@ -154,7 +155,19 @@ public class landingScreen extends JPanel
         panel.add(addGrantee,c);
         add(panel, new GridBagConstraints());
     }
-
+    class projectAlreadyFinnishedListener implements ListSelectionListener {
+        @Override
+        public void valueChanged(ListSelectionEvent e) { 
+            int projFinI;
+            projFinI=ProjectListF.getSelectedIndex();
+            if(gProjectList.get(projFinI).projectState!=true){
+                edit.setEnabled(false);
+            }
+            else{
+            edit.setEnabled(true);
+            }
+        }
+    }
     class EditListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
