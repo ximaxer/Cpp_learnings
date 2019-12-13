@@ -148,7 +148,8 @@ public class ProjectManage {
     private class AssignListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
-           
+           int index = taskList.getSelectedIndex();
+           TaskAssignment assignTask = new TaskAssignment(projeto, index);
                 
         }
     

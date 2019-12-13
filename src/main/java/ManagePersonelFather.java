@@ -208,7 +208,6 @@ public class ManagePersonelFather{
                 StringListAvailableGrantee.add(AssignedGrantees.get(SelectedRemoveGrantee).getName());
                 AssignedGrantees.remove(SelectedRemoveGrantee);
                 listaGrantees.removeElementAt(SelectedRemoveGrantee);
-                for(int i=0; i<StringListAvailableGrantee.size();i++)System.out.println(StringListAvailableGrantee.get(i));
                 if(GranteeListF.getSize().equals(0)==true)removeGranteeButton.setEnabled(false);
                 panel.updateUI();
             }
@@ -227,7 +226,6 @@ public class ManagePersonelFather{
                 StringListAvailableDocent.add(AssignedDocents.get(SelectedRemoveDocent).getName());
                 AssignedDocents.remove(SelectedRemoveDocent);
                 listaDocents.removeElementAt(SelectedRemoveDocent);
-                for(int i=0; i<StringListAvailableDocent.size();i++)System.out.println(StringListAvailableDocent.get(i));
                 if(DocentListF.getSize().equals(0)==true)removeDocentButton.setEnabled(false);
                 panel.updateUI();
             }
