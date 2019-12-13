@@ -16,11 +16,15 @@ public class ProjectEditFrame {
     private JButton buttonEdit,bManageTasks,bManagePersonel;
     private DefaultListModel listModel;
     private int index;
+    private ArrayList<Grantee> gGranteeList;
+    private ArrayList<Docent> gDocentList;
     
-    public ProjectEditFrame(Project proj,DefaultListModel list, int i) {
+    public ProjectEditFrame(Project proj,DefaultListModel list, int i,ArrayList<Grantee> GranteeList,ArrayList<Docent> DocentList) {
         index= i;
         listModel=list;
         projeto=proj;
+        gDocentList=DocentList;
+        gGranteeList = GranteeList;
         
         f.setLayout(new GridBagLayout());
         panel.setLayout(new GridBagLayout());
@@ -40,7 +44,7 @@ public class ProjectEditFrame {
         c.gridy = 2;
         panel.add(buttonEdit,c);
 
-        bManageTasks = new JButton("Manage Project");
+        bManageTasks = new JButton("Manage Tasks");
         c.ipady = 0;       
         c.gridy = 3;
         panel.add(bManageTasks,c);
@@ -83,7 +87,7 @@ public class ProjectEditFrame {
     private class bManagePersonelListener implements ActionListener{
             @Override
             public void actionPerformed(ActionEvent e){
-            ManagePersonelFather PersonelManagement = new ManagePersonelFather();
+            ManagePersonelFather PersonelManagement = new ManagePersonelFather(projeto, gGranteeList,gDocentList);
             f.dispose();
         }
            

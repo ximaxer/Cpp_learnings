@@ -14,6 +14,7 @@ abstract public class Grantee extends Person{
     //========================================================================//
     //========================================================================//  
     protected Date initialDate, finalDate;
+    protected Project project;
     //========================================================================//
     //========================================================================//
     //===========================                =============================//
@@ -31,6 +32,7 @@ abstract public class Grantee extends Person{
         super.email = email;
         this.initialDate = initialDate;
         this.finalDate = finalDate;
+        this.project=null;
     }
     
     //========================================================================//
