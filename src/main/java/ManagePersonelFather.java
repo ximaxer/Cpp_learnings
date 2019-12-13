@@ -26,7 +26,7 @@ public class ManagePersonelFather{
     private ArrayList<Docent> gDocentList, AvailableDocents = new ArrayList<Docent>(), AssignedDocents = new ArrayList<Docent>();
     ArrayList<String> StringListAvailableGrantee = new ArrayList<String>();
     ArrayList<String> StringListAvailableDocent = new ArrayList<String>();
-    int SelectedGranteeIndex, SelectedDocentIndex;
+    int SelectedGranteeIndex, SelectedDocentIndex, SelectedRemoveDocent, SelectedRemoveGrantee;
     Project project;
     
     public ManagePersonelFather(Project projectI, ArrayList<Grantee> GranteeList, ArrayList<Docent> DocentList){
@@ -62,8 +62,8 @@ public class ManagePersonelFather{
         }
         
         
-        String[] AvailableDocents=StringListAvailableDocent.toArray(new String[0]);
-        ChooseDocent = new JComboBox(AvailableDocents);
+        String[] sAvailableDocents=StringListAvailableDocent.toArray(new String[0]);
+        ChooseDocent = new JComboBox(sAvailableDocents);
         AvailableDocentListener DocentCBlistener=new AvailableDocentListener();
         ChooseDocent.addActionListener(DocentCBlistener);
         
@@ -131,12 +131,19 @@ public class ManagePersonelFather{
         c.gridx=1;
         panel.add(DocentScrollPane,c);
 
-        addGranteeBListener GranteeBlisten=new addGranteeBListener();
-        addGranteeButton.addActionListener(GranteeBlisten);
+        addGranteeBListener aGranteeBListener=new addGranteeBListener();
+        addGranteeButton.addActionListener(aGranteeBListener);
         
-        addDocentBListener DocentBlisten=new addDocentBListener();
-        addDocentButton.addActionListener(DocentBlisten);
+        addDocentBListener aDocentBlistener=new addDocentBListener();
+        addDocentButton.addActionListener(aDocentBlistener);
 
+        removeGranteeBListener rGranteeBListener= new removeGranteeBListener();
+        removeGranteeButton.addActionListener(rGranteeBListener);
+        
+        removeDocentBListener rDocentBListener= new removeDocentBListener();
+        removeDocentButton.addActionListener(rDocentBListener);
+        
+        
         f.add(panel, new GridBagConstraints());
         f.setSize(500,500);
         f.setVisible(true);
@@ -179,11 +186,54 @@ public class ManagePersonelFather{
                 StringListAvailableGrantee.remove(SelectedGranteeIndex);
                 ChooseGrantee.removeItemAt(SelectedGranteeIndex);
                 if (ChooseGrantee.getItemAt(0)==null)addGranteeButton.setEnabled(false);
-                ChooseGrantee.setSelectedIndex(0);
+                else ChooseGrantee.setSelectedIndex(0);
                 panel.updateUI();
             }
         }
     }
+    
+    
+    
+    private class removeGranteeBListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent exce){
+            if (SelectedRemoveGrantee > -1) {
+                AssignedGrantees.get(SelectedRemoveGrantee).project=null;
+                project.grantees.remove(AssignedGrantees.get(SelectedRemoveGrantee));
+                AvailableGranteeList.add(AssignedGrantees.get(SelectedRemoveGrantee));
+                
+                
+                
+                StringListAvailableGrantee.add(AssignedGrantees.get(SelectedRemoveGrantee).getName());
+                AssignedGrantees.remove(SelectedRemoveGrantee);
+                listaGrantees.removeElementAt(SelectedRemoveGrantee);
+                for(int i=0; i<StringListAvailableGrantee.size();i++)System.out.println(StringListAvailableGrantee.get(i));
+                if(GranteeListF.getSize().equals(0)==true)removeGranteeButton.setEnabled(false);
+                panel.updateUI();
+            }
+        }
+    }
+    
+    
+    private class removeDocentBListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent exce){
+            if (SelectedRemoveDocent > -1) {
+                AssignedDocents.get(SelectedRemoveDocent).projects.remove(project);
+                project.docents.remove(AssignedDocents.get(SelectedRemoveDocent));
+                AvailableDocents.add(AssignedDocents.get(SelectedRemoveDocent));
+                StringListAvailableDocent.add(AssignedDocents.get(SelectedRemoveDocent).getName());
+                AssignedDocents.remove(SelectedRemoveDocent);
+                listaDocents.removeElementAt(SelectedRemoveDocent);
+                for(int i=0; i<StringListAvailableDocent.size();i++)System.out.println(StringListAvailableDocent.get(i));
+                if(DocentListF.getSize().equals(0)==true)removeDocentButton.setEnabled(false);
+                panel.updateUI();
+            }
+        }
+    }
+    
     
     private class addDocentBListener implements ActionListener{
 
@@ -199,7 +249,7 @@ public class ManagePersonelFather{
                 StringListAvailableDocent.remove(SelectedDocentIndex);
                 ChooseDocent.removeItemAt(SelectedDocentIndex);
                 if (ChooseDocent.getItemAt(0)==null)addDocentButton.setEnabled(false);
-                ChooseDocent.setSelectedIndex(0);
+                else ChooseDocent.setSelectedIndex(0);
                 panel.updateUI();
             }
         }
@@ -208,26 +258,14 @@ public class ManagePersonelFather{
     class GranteeListListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) { 
-
-            if (GranteeListF.getSelectedIndex() == -1) {
-            //    edit.setEnabled(false);
-
-            } else {
-            //    edit.setEnabled(true);
-            }
+            SelectedRemoveGrantee = GranteeListF.getSelectedIndex();
         }
     }
     
     class DocentListListener implements ListSelectionListener {
         @Override
         public void valueChanged(ListSelectionEvent e) { 
-        
-            if (GranteeListF.getSelectedIndex() == -1) {
-            //    edit.setEnabled(false);
-
-            } else {
-            //    edit.setEnabled(true);
-            }
+            SelectedRemoveDocent = DocentListF.getSelectedIndex();
         }
     }
 }

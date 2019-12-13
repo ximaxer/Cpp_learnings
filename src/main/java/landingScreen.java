@@ -42,7 +42,7 @@ public class landingScreen extends JPanel
         listaProjetos = new DefaultListModel();
         for(int i=0;i<ProjectList.size();i++)
         listaProjetos.addElement(gProjectList.get(i).getName());
-        
+
         listaGrantees = new DefaultListModel();
         for(int i=0;i<grantees.size();i++){
             listaGrantees.addElement(gGrantees.get(i).getName() + "   " + gGrantees.get(i).getClass().getSimpleName());
@@ -54,6 +54,7 @@ public class landingScreen extends JPanel
         
         
         ProjectListF = new JList(listaProjetos);
+        ProjectListF.setSelectedIndex(0);
         ProjectListF.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         ProjectListF.addListSelectionListener(this);
         JScrollPane ProjectScrollPane = new JScrollPane(ProjectListF);
