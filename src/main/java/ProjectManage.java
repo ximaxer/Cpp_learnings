@@ -23,7 +23,7 @@ public class ProjectManage {
         gTaskList=projeto.tasks;
         listaTasks = new DefaultListModel();
         for(int i=0;i<gTaskList.size();i++){
-            listaTasks.addElement(gTaskList.get(i).getTName());
+            listaTasks.addElement(gTaskList.get(i).getTName()+"   "+gTaskList.get(i).getProgress()+"%");
         }
         taskList = new JList(listaTasks);
         taskList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -95,11 +95,9 @@ public class ProjectManage {
         @Override
         public void actionPerformed(ActionEvent e){
             int index = taskList.getSelectedIndex();
-             if(gTaskList.get(index).getTName().compareTo(listaTasks.get(index).toString())==0){
                  listaTasks.remove(index); 
                  panel.updateUI();
                  gTaskList.remove(index);  
              }
         }
-    }
 }

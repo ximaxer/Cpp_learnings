@@ -20,7 +20,7 @@ public class landingScreen extends JPanel
     implements ListSelectionListener {
     private JList ProjectListF, DocentListF, GranteeListF;
     private DefaultListModel listaProjetos, listaDocents, listaGrantees;
-    private JLabel ProjectsLabel, DocentsLabel, GranteesLabel;
+    private JLabel ProjectsLabel, DocentsLabel, GranteesLabel,titleLabel;
     
     private JPanel panel= new JPanel();
     private JFrame f = new JFrame("Edit Project");
@@ -105,13 +105,21 @@ public class landingScreen extends JPanel
         ProjectButtonPane.add(addProject);
         ProjectButtonPane.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
 
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.insets = new Insets(100,75,0,75);
+        
         ProjectsLabel = new JLabel ("PROJECTS:");
         DocentsLabel = new JLabel ("DOCENTS:");
         GranteesLabel = new JLabel ("GRANTEES:");
+        titleLabel= new JLabel ("Welcome to CISUC!");
+        titleLabel.setFont(new Font("Courier New", Font.BOLD, 24));
         
+        c.insets = new Insets(50,75,0,75);
         c.gridy = 0;
+        c.gridx = 1;
+        panel.add(titleLabel, c);
+       
+        
+        c.insets = new Insets(50,75,0,75);
+        c.gridy = 1;
         c.gridx = 0;
         panel.add(ProjectsLabel, c);
                 
@@ -124,7 +132,7 @@ public class landingScreen extends JPanel
         
         c.insets = new Insets(10,75,0,75);
         c.gridx = 0;      
-        c.gridy = 1;
+        c.gridy = 2;
         panel.add(ProjectScrollPane, c);
         
         c.gridx = 1;
@@ -134,7 +142,7 @@ public class landingScreen extends JPanel
         panel.add(GranteeScrollPane, c);
         
         c.insets = new Insets(0,75,0,75);
-        c.gridy = 2; 
+        c.gridy = 3; 
         c.gridx = 0;
         panel.add(ProjectButtonPane, c);
         
